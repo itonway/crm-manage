@@ -1,0 +1,6 @@
+.idea
+crm-common/target
+crm-controller/target
+crm-dao/target
+crm-entity/target
+crm-service/target
