@@ -2,6 +2,7 @@ package com.itontheway.manage.controller;
 
 import com.itontheway.manage.annotation.IgnorIntercept;
 import com.itontheway.manage.entity.User;
+import com.itontheway.manage.exception.CustomizeExceptionDemo;
 import com.itontheway.manage.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -70,8 +71,8 @@ public class UserController extends BaseController{
      * @Return java.lang.String
      **/
     @RequestMapping(value = "customizeExceptionHandler",method = RequestMethod.GET)
-    public String customizeExceptionHandler() throws Exception {
-        throw new Exception("自定义异常信息");
+    public String customizeExceptionHandler() throws CustomizeExceptionDemo {
+        throw new CustomizeExceptionDemo("0","自定义异常信息");
     }
 
 }
