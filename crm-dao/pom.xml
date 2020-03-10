@@ -14,5 +14,13 @@
     <artifactId>crm-dao</artifactId>
     <packaging>jar</packaging>
 
+    <dependencies>
+        <dependency>
+            <groupId>com.itontheway.manage</groupId>
+            <artifactId>crm-entity</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+    </dependencies>
+
 
 </project>

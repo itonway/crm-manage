@@ -1,4 +1,16 @@
 .idea
+.idea/dataSources
+.idea/EasyCodeConfig
+.idea/inspectionProfiles
+.idea/.gitignore
+.idea/.name
+.idea/compiler.xml
+.idea/dataSources.local.xml
+.idea/encodings.xml
+.idea/misc.xml
+.idea/uiDesigner.xml
+.idea/vcs.xml
+.idea/workspace.xml
 crm-common/target
 crm-controller/target
 crm-dao/target
