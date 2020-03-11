@@ -5,11 +5,11 @@
     <resultMap id="BaseResultMap" type="com.itontheway.manage.entity.User">
         <id column="id" jdbcType="BIGINT" property="id"/>
         <result column="user_name" jdbcType="VARCHAR" property="userName"/>
-        <result column="password" jdbcType="VARCHAR" property="password"/>
         <result column="login_name" jdbcType="VARCHAR" property="loginName"/>
         <result column="age" jdbcType="VARCHAR" property="age"/>
-        <result column="sex" jdbcType="CHAR" property="sex"/>
         <result column="email" jdbcType="VARCHAR" property="email"/>
+        <result column="sex" jdbcType="CHAR" property="sex"/>
+        <result column="password" jdbcType="VARCHAR" property="password"/>
         <result column="mobile" jdbcType="VARCHAR" property="mobile"/>
         <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
         <result column="creater_id" jdbcType="BIGINT" property="createrId"/>
@@ -35,6 +35,37 @@
         where id = #{id,jdbcType=BIGINT}
     </delete>
 
+<!--    <insert id="insert" useGeneratedKeys="true" keyProperty="id" parameterType="com.itontheway.manage.entity.User">-->
+<!--        insert into t_crm_user-->
+<!--        <trim prefix="(" suffix=")" suffixOverrides=",">-->
+<!--            <if test="userName != null">-->
+<!--                user_name,-->
+<!--            </if>-->
+<!--            <if test="loginName != null">-->
+<!--                login_name,-->
+<!--            </if>-->
+<!--            <if test="age != null">-->
+<!--                age,-->
+<!--            </if>-->
+<!--            <if test="email != null">-->
+<!--                email,-->
+<!--            </if>-->
+<!--        </trim>-->
+<!--        <trim prefix="values (" suffix=")" suffixOverrides=",">-->
+<!--            <if test="userName != null">-->
+<!--                #{userName,jdbcType=VARCHAR},-->
+<!--            </if>-->
+<!--            <if test="loginName != null">-->
+<!--                #{loginName,jdbcType=VARCHAR},-->
+<!--            </if>-->
+<!--            <if test="age != null">-->
+<!--                #{age,jdbcType=VARCHAR},-->
+<!--            </if>-->
+<!--            <if test="email != null">-->
+<!--                #{email,jdbcType=VARCHAR},-->
+<!--            </if>-->
+<!--        </trim>-->
+<!--    </insert>-->
 
     <insert id="insert" useGeneratedKeys="true" keyProperty="id" parameterType="com.itontheway.manage.entity.User">
         insert into t_crm_user

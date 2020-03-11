@@ -7,6 +7,9 @@ import com.itontheway.manage.exception.CustomizeExceptionDemo;
 import com.itontheway.manage.service.IUserService;
 import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -26,6 +29,26 @@ public class UserController extends BaseController{
 
     @Autowired
     IUserService userService;
+    
+    /**
+     * @Author 公众号 itontheway
+     * @Date 2020/3/11 16:59
+     * @Desc // 保存和修改用户
+     * @Param [user, bindingResult]
+     * @Return void
+     **/
+    @GetMapping(value = "saveOrUpdateUser")
+    @ApiOperation(value = "保存和修改用户",notes = "保存和修改用户",produces = "application/json", httpMethod = "GET")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "user", value = "用户", dataType = "object", paramType = "query", required = false)
+    })
+    @ApiResponses({
+            @ApiResponse(code = 200, message = "操作成功", response = Result.class),
+            @ApiResponse(code = 500, message = "操作失败", response = Result.class)
+    })
+    public void saveOrUpdateUser(@Validated User user, BindingResult bindingResult){
+        userService.saveOrUpdate(user);
+    }
     
     /**
      * @Author 公众号 itontheway

@@ -4,6 +4,11 @@ import com.itontheway.manage.entity.common.BaseEntity;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
+import org.hibernate.validator.constraints.Range;
+
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 /**
  * @Author 公众号 itontheway
@@ -14,19 +19,25 @@ import lombok.Data;
 @ApiModel(value = "用户实体类")
 public class User extends BaseEntity {
     @ApiModelProperty(value = "用户名")
+    @NotBlank(message = "用户名不能为空")
     private String userName;
-    @ApiModelProperty(value = "密码")
-    private String password;
     @ApiModelProperty(value = "登录名")
+    @NotNull(message = "登录名不能为空")
     private String loginName;
     @ApiModelProperty(value = "年龄")
-    private String age;
+    @Range(max = 200,min = 0,message = "年龄格式不正确")
+    @NotNull(message = "年龄不能为空")
+    private Integer age;
+    @ApiModelProperty(value = "邮箱")
+    @NotBlank(message = "邮箱不能为空")
+    @Email(message = "邮箱格式不正确")
+    private String email;
     @ApiModelProperty(value = "性别1男2女")
     private String sex;
-    @ApiModelProperty(value = "邮箱")
-    private String email;
     @ApiModelProperty(value = "状态0禁用1可用")
     private String status;
     @ApiModelProperty(value = "手机号")
     private String mobile;
+    @ApiModelProperty(value = "密码")
+    private String password;
 }
