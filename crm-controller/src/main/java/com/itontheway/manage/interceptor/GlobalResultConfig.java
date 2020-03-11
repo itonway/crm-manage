@@ -17,9 +17,9 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyAdvice;
  * @description: 实现ResponseBodyAdvice接口，可以对返回值在输出之前进行修改
  * @date 2020/3/10 16:36
  */
-@RestControllerAdvice
 @Slf4j
-public class GlobalResultConfig implements ResponseBodyAdvice<Object> {
+@RestControllerAdvice(basePackages = {"com.itontheway.manage.controller"})
+public class GlobalResultConfig implements ResponseBodyAdvice<Object>{
     /**
      * @Author 公众号 itontheway
      * @Date 2020/3/10 16:52
