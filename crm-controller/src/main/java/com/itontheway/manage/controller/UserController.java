@@ -29,7 +29,7 @@ public class UserController extends BaseController{
 
     @Autowired
     IUserService userService;
-    
+
     /**
      * @Author 公众号 itontheway
      * @Date 2020/3/11 16:59
