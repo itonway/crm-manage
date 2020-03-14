@@ -94,6 +94,7 @@ public interface BaseDao<T> {
      **/
     T findById(Long id);
 
+    T findByEntity(T t);
 
     List<T> findListByEntity(T t);
 

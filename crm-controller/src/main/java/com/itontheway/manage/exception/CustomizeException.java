@@ -8,11 +8,11 @@ import lombok.Data;
  * @date 2020/3/10 17:58
  */
 @Data
-public class CustomizeExceptionDemo extends RuntimeException {
+public class CustomizeException extends RuntimeException {
     private String code;
     private String msg;
 
-    public CustomizeExceptionDemo(String code,String msg){
+    public CustomizeException(String code, String msg){
         this.code = code;
         this.msg = msg;
     }

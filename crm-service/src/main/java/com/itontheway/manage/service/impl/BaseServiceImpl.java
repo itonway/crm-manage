@@ -17,7 +17,7 @@ import java.util.Map;
  * @date 2020/3/9 12:22
  */
 @Service
-public class BaseServiceImpl<T extends BaseEntity> implements IBaseService<T> {
+public abstract class BaseServiceImpl<T extends BaseEntity> implements IBaseService<T> {
 
     @Autowired
     private BaseDao<T> baseDao;
@@ -76,6 +76,11 @@ public class BaseServiceImpl<T extends BaseEntity> implements IBaseService<T> {
     @Override
     public T findById(Long id) {
         return (T) baseDao.findById ( id );
+    }
+
+    @Override
+    public T findByEntity(T t) {
+        return baseDao.findByEntity ( t );
     }
 
     @Override

@@ -31,6 +31,8 @@ public interface IBaseService<T> {
 
     T findById(Long id);
 
+    T findByEntity(T t);
+
     List<T> findListByEntity(T t);
 
     List<T> findListByMap(Map<String, Object> params);

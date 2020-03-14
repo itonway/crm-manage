@@ -1,7 +1,7 @@
 package com.itontheway.manage.interceptor;
 
 import com.itontheway.manage.common.Result;
-import com.itontheway.manage.exception.CustomizeExceptionDemo;
+import com.itontheway.manage.exception.CustomizeException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.validation.BindException;
 import org.springframework.validation.FieldError;
@@ -27,8 +27,12 @@ public class GlobalExceptionConfig {
      * @Param [e]
      * @Return com.itontheway.manage.common.Result
      **/
-    @ExceptionHandler({CustomizeExceptionDemo.class,ConstraintViolationException.class, BindException.class})
+    @ExceptionHandler({CustomizeException.class,ConstraintViolationException.class, BindException.class,UndeclaredThrowableException.class})
     public Result exceptionHandler(Exception e) {
+        if(e instanceof CustomizeException){
+            CustomizeException customizeException = (CustomizeException) e;
+            return Result.fail(customizeException.getMsg());
+        }
         if(e instanceof UndeclaredThrowableException){
             Throwable e1 = ((UndeclaredThrowableException) e).getUndeclaredThrowable();
             List<FieldError> fieldErrors = ((BindException) e1).getFieldErrors();

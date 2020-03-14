@@ -1,11 +1,7 @@
 package com.itontheway.manage.schedule;
 
-import com.itontheway.manage.common.DateUtil;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
-
-import java.util.Date;
 
 /**
  * @author: 公众号 itontheway
@@ -15,20 +11,20 @@ import java.util.Date;
 @Slf4j
 @Component
 public class MyTask {
-    //每2秒执行一次​
-    @Scheduled(cron = "0/2 * * * * *")
-    public void task2() {
-        log.info("定时任务开始2...."+ DateUtil.formatLocal(new Date()));
-    }
-    //每3秒执行一次​
-    @Scheduled(cron = "0/3 * * * * *")
-    public void task3() {
-        log.info("定时任务开始1...."+ DateUtil.formatLocal(new Date()));
-    }
-    //每4秒执行一次​
-    @Scheduled(cron = "0/4 * * * * *")
-    public void task4() {
-        log.info("定时任务开始3...."+ DateUtil.formatLocal(new Date()));
-    }
+//    //每2秒执行一次​
+//    @Scheduled(cron = "0/2 * * * * *")
+//    public void task2() {
+//        log.info("定时任务开始2...."+ DateUtil.formatLocal(new Date()));
+//    }
+//    //每3秒执行一次​
+//    @Scheduled(cron = "0/3 * * * * *")
+//    public void task3() {
+//        log.info("定时任务开始1...."+ DateUtil.formatLocal(new Date()));
+//    }
+//    //每4秒执行一次​
+//    @Scheduled(cron = "0/4 * * * * *")
+//    public void task4() {
+//        log.info("定时任务开始3...."+ DateUtil.formatLocal(new Date()));
+//    }
 
 }

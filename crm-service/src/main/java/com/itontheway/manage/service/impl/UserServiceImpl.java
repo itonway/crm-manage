@@ -1,8 +1,15 @@
 package com.itontheway.manage.service.impl;
 
+import com.itontheway.manage.dao.MenuDao;
+import com.itontheway.manage.dao.UserRoleDao;
+import com.itontheway.manage.entity.Menu;
 import com.itontheway.manage.entity.User;
+import com.itontheway.manage.entity.UserRole;
 import com.itontheway.manage.service.IUserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * @author: 公众号 itontheway
@@ -11,5 +18,19 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class UserServiceImpl extends BaseServiceImpl<User> implements IUserService {
+    @Autowired
+    UserRoleDao userRoleDao;
+    @Autowired
+    MenuDao menuDao;
+
+    @Override
+    public List<UserRole> findUserRoleListByUserId(Long userId) {
+        return userRoleDao.findUserRoleListByUserId(userId);
+    }
+
+    @Override
+    public List<Menu> findMenuListByRoleIds(List<UserRole> userRoleList) {
+        return menuDao.findMenuListByRoleIds(userRoleList);
+    }
 
 }

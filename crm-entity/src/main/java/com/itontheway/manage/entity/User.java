@@ -24,7 +24,7 @@ public class User extends BaseEntity {
     @ApiModelProperty(value = "登录名")
     @NotNull(message = "登录名不能为空")
     private String loginName;
-    @ApiModelProperty(value = "年龄")
+    @ApiModelProperty(value = "年龄",example = "12")
     @Range(max = 200,min = 0,message = "年龄格式不正确")
     @NotNull(message = "年龄不能为空")
     private Integer age;
@@ -40,4 +40,6 @@ public class User extends BaseEntity {
     private String mobile;
     @ApiModelProperty(value = "密码")
     private String password;
+    @ApiModelProperty(value = "密码盐值")
+    private String salt;
 }

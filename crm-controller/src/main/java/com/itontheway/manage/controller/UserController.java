@@ -3,7 +3,7 @@ package com.itontheway.manage.controller;
 import com.github.pagehelper.PageInfo;
 import com.itontheway.manage.common.Result;
 import com.itontheway.manage.entity.User;
-import com.itontheway.manage.exception.CustomizeExceptionDemo;
+import com.itontheway.manage.exception.CustomizeException;
 import com.itontheway.manage.service.IUserService;
 import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -147,8 +147,8 @@ public class UserController extends BaseController{
             @ApiResponse(code = 200, message = "操作成功", response = Result.class),
             @ApiResponse(code = 500, message = "操作失败", response = Result.class)
     })
-    public String customizeExceptionHandler() throws CustomizeExceptionDemo {
-        throw new CustomizeExceptionDemo("0","自定义异常信息");
+    public String customizeExceptionHandler() throws CustomizeException {
+        throw new CustomizeException("0","自定义异常信息");
     }
 
 }

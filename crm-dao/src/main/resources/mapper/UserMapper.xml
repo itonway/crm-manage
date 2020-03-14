@@ -192,4 +192,15 @@
         </where>
     </select>
 
+    <select id="findByEntity" parameterType="com.itontheway.manage.entity.User" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM t_crm_user
+        <where>
+            <if test="loginName != null and loginName != '' " >
+                AND login_name = #{loginName}
+            </if>
+        </where>
+    </select>
+
 </mapper>

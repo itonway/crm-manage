@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.itontheway.manage.dao.MenuDao">
+
+    <resultMap id="BaseResultMap" type="com.itontheway.manage.entity.Menu">
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="p_id" jdbcType="VARCHAR" property="pId"/>
+        <result column="url" jdbcType="VARCHAR" property="url"/>
+        <result column="ramark" jdbcType="VARCHAR" property="ramark"/>
+        <result column="status" jdbcType="CHAR" property="status"/>
+        <result column="type" jdbcType="VARCHAR" property="type"/>
+        <result column="permission" jdbcType="VARCHAR" property="permission"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="createrId" jdbcType="VARCHAR" property="createrId"/>
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+        <result column="updaterId" jdbcType="VARCHAR" property="updaterId"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        m.id, m.name, m.p_id, m.url, m.ramark, m.status, m.type,m.permission, m.create_time, m.creater_id, m.update_time, m.updater_Id
+    </sql>
+
+    <delete id="deleteById" parameterType="java.lang.Long">
+        delete
+        from t_crm_menu
+        where id = #{id,jdbcType=BIGINT}
+    </delete>
+
+
+    <insert id="insert" parameterType="com.itontheway.manage.entity.Menu">
+        insert into t_crm_menu
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="name != null">
+                name,
+            </if>
+            <if test="pId != null">
+                p_id,
+            </if>
+            <if test="url != null">
+                url,
+            </if>
+            <if test="ramark != null">
+                ramark,
+            </if>
+            <if test="status != null">
+                status,
+            </if>
+            <if test="type != null">
+                type,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="createrId != null">
+                createrId,
+            </if>
+            <if test="updateTime != null">
+                update_time,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="name != null">
+                #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="pId != null">
+                #{pId,jdbcType=BIGINT},
+            </if>
+            <if test="url != null">
+                #{url,jdbcType=VARCHAR},
+            </if>
+            <if test="ramark != null">
+                #{ramark,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=CHAR},
+            </if>
+            <if test="type != null">
+                #{type,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                now(),
+            </if>
+            <if test="createrId != null">
+                #{createrId,jdbcType=VARCHAR},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="update" parameterType="com.itontheway.manage.entity.Menu">
+        update t_crm_menu
+        <set>
+            <if test="name != null">
+                name = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="pId != null">
+                p_id = #{pId,jdbcType=BIGINT},
+            </if>
+            <if test="url != null">
+                url = #{url,jdbcType=VARCHAR},
+            </if>
+            <if test="ramark != null">
+                ramark = #{ramark,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                status = #{status,jdbcType=CHAR},
+            </if>
+            <if test="type != null">
+                type = #{type,jdbcType=VARCHAR},
+            </if>
+            update_time = #{updateTime,jdbcType=TIMESTAMP},
+            <if test="updaterId != null">
+                updater_id = #{updaterId,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+
+    <select id="findMenuList" parameterType="com.itontheway.manage.entity.Menu" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM T_INFO_MENU
+        <where>
+            <if test="pId != null">
+                AND P_ID = #{pId}
+            </if>
+            <if test="type !=null and type != ''">
+                AND TYPE = #{type}
+            </if>
+            <if test="menuIds != null">
+                AND ID IN
+                <foreach collection="menuIds" item="menuId" index = "index"  open="(" separator="," close=")">
+                    #{menuId}
+                </foreach>
+            </if>
+        </where>
+    </select>
+
+    <select id="findById" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from t_crm_menu
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+
+    <select id="findMenuListByPid" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM T_INFO_MENU WHERE P_ID = #{pid}
+    </select>
+
+    <select id="findMenuCountByPid" parameterType="java.lang.Long" resultType="java.lang.Integer">
+        SELECT COUNT(1)
+        FROM T_INFO_MENU
+        WHERE P_ID = #{pId}
+    </select>
+
+    <select id="findMenuListByRoleIds" resultMap="BaseResultMap">
+        SELECT <include refid="Base_Column_List"/> FROM T_CRM_MENU M ,T_CRM_ROLE_MENU R WHERE M.ID = R.MENU_ID AND R.ROLE_ID IN
+        <foreach collection="userRoleList" index="index" item="userRoleList" open="(" separator="," close=")">
+            #{userRoleList.roleId}
+        </foreach>
+    </select>
+
+
+</mapper>
