@@ -5,16 +5,16 @@ package com.itontheway.manage.common;
  * @description: TODO
  * @date 2020/3/14 10:42
  */
-public enum  EnumUtil {
+public enum EnumUtils {
     SUCCESS("1","成功"),
     FAILED("0","失败");
 
-    EnumUtil(String msg, String code){
+    EnumUtils(String msg, String code){
         this.code = code;
         this.msg = msg;
     }
 
-    EnumUtil(){
+    EnumUtils(){
         this.code = "1";
         this.msg = "成功";
     }

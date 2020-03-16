@@ -18,14 +18,14 @@ public class Result<T> implements Serializable {
     //返回的数据
     private T data;
 
-    public static Result success() {
-        return success(null);
+    public static Result success(String msg) {
+        return success(msg,null);
     }
 
-    public static Result success(Object data) {
+    public static Result success(String msg,Object data) {
         Result result = new Result();
         result.setCode(1);
-        result.setMsg("SUCCESS");
+        result.setMsg(msg);
         result.setData(data);
         return result;
     }

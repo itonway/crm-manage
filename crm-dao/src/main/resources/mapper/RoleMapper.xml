@@ -95,7 +95,7 @@
         where id = #{id,jdbcType=BIGINT}
     </update>
 
-    <select id="findRoleList" parameterType="com.itontheway.manage.entity.Role" resultMap="BaseResultMap">
+    <select id="findListByEntity" parameterType="com.itontheway.manage.entity.Role" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
         from t_crm_role

@@ -74,10 +74,4 @@ public class LoginController  extends BaseController{
     public String showUser() {
         return "这是学生信息...";
     }
-
-    @RequiresPermissions("role:show")
-    @GetMapping("/showRole")
-    public String showRole() {
-        return "这是角色信息...";
-    }
 }

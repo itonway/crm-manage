@@ -10,7 +10,6 @@ import org.crazycake.shiro.RedisCacheManager;
 import org.crazycake.shiro.RedisManager;
 import org.crazycake.shiro.RedisSessionDAO;
 import org.crazycake.shiro.serializer.ObjectSerializer;
-import org.crazycake.shiro.serializer.StringSerializer;
 import org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -64,7 +63,7 @@ public class ShiroConfig {
     @Bean(name = "redisCacheManager")
     public RedisCacheManager cacheManager() {
         RedisCacheManager redisCacheManager = new RedisCacheManager();
-        redisCacheManager.setKeySerializer(new StringSerializer());
+        redisCacheManager.setKeySerializer(new ObjectSerializer());
         redisCacheManager.setValueSerializer(new ObjectSerializer());
         redisCacheManager.setRedisManager(redisManager());
         redisCacheManager.setExpire(1800);
@@ -138,6 +137,9 @@ public class ShiroConfig {
         Map<String, String> filterChainMap  = new LinkedHashMap<>();
         //3.放开 Swagger2 ，如果swagger2报 NumberFormatException这个异常 ，则降低swagger2的版本
         filterChainMap.put("/", "anon");
+        filterChainMap.put("/user/**", "anon");
+        filterChainMap.put("/role/**", "anon");
+        filterChainMap.put("/mail/**", "anon");
         filterChainMap.put("/swagger-ui.html", "anon");
         filterChainMap.put("/swagger-resources/**", "anon");
         filterChainMap.put("/v2/api-docs/**", "anon");
@@ -158,6 +160,7 @@ public class ShiroConfig {
         shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainMap);
         return shiroFilterFactoryBean;
     }
+
 
     @Bean
     public ShiroRealm shiroRealm(){

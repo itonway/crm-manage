@@ -1,7 +1,7 @@
 package com.itontheway.manage.config;
 
 import com.itontheway.manage.common.Const;
-import com.itontheway.manage.common.EnumUtil;
+import com.itontheway.manage.common.EnumUtils;
 import com.itontheway.manage.entity.Menu;
 import com.itontheway.manage.entity.User;
 import com.itontheway.manage.entity.UserRole;
@@ -50,7 +50,7 @@ public class ShiroRealm extends AuthorizingRealm {
         Assert.notNull(loginUser,"【"+name+"】用户不存在");
         String status = loginUser.getStatus();
         if(Const.ZERO.equals(status)){
-            throw new CustomizeException(EnumUtil.FAILED.getCode(),"登陆用户【"+loginUser.getLoginName()+"】已被禁用");
+            throw new CustomizeException(EnumUtils.FAILED.getCode(),"登陆用户【"+loginUser.getLoginName()+"】已被禁用");
         }
         //这里要传入User对象，才能在doGetAuthorizationInfo方法中获得对象
         return new SimpleAuthenticationInfo(loginUser, loginUser.getPassword(), getName());
@@ -73,7 +73,7 @@ public class ShiroRealm extends AuthorizingRealm {
         User loginUser = userService.findById(id);
         String status = loginUser.getStatus();
         if(Const.ZERO.equals(status)){
-            throw new CustomizeException(EnumUtil.FAILED.getCode(),"【"+loginUser.getLoginName()+"】用户已被禁用");
+            throw new CustomizeException(EnumUtils.FAILED.getCode(),"【"+loginUser.getLoginName()+"】用户已被禁用");
         }
         SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
         Set<String> roles = new HashSet<>();
@@ -81,7 +81,7 @@ public class ShiroRealm extends AuthorizingRealm {
         List<UserRole> userRoleList = userService.findUserRoleListByUserId(loginUser.getId());
         if(CollectionUtils.isEmpty(userRoleList)){
             log.error("登录人【"+loginUser.getLoginName()+"】用户没有配置对应的角色..");
-            throw new CustomizeException(EnumUtil.FAILED.getCode(),"登录人【"+loginUser.getLoginName()+"】没有配置对应的角色");
+            throw new CustomizeException(EnumUtils.FAILED.getCode(),"登录人【"+loginUser.getLoginName()+"】没有配置对应的角色");
         }
         for (UserRole userRole : userRoleList) {
             Long roleId = userRole.getRoleId();
@@ -91,7 +91,7 @@ public class ShiroRealm extends AuthorizingRealm {
         List<Menu> menuList = userService.findMenuListByRoleIds(userRoleList);
         if(CollectionUtils.isEmpty(menuList)){
             log.error("登录人【"+loginUser.getLoginName()+"】对应的角色没有分配菜单权限...");
-            throw new CustomizeException(EnumUtil.FAILED.getCode(),"登录人【"+loginUser.getLoginName()+"】对应的角色没有分配菜单权限");
+            throw new CustomizeException(EnumUtils.FAILED.getCode(),"登录人【"+loginUser.getLoginName()+"】对应的角色没有分配菜单权限");
         }
         for (Menu menu : menuList) {
             String permission = menu.getPermission();

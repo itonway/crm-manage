@@ -50,7 +50,7 @@ public class GlobalResultConfig implements ResponseBodyAdvice<Object>{
     public Object beforeBodyWrite(Object o, MethodParameter methodParameter, MediaType mediaType, Class<? extends HttpMessageConverter<?>> aClass, ServerHttpRequest serverHttpRequest, ServerHttpResponse serverHttpResponse) {
         // 如果返回值为空，则直接封装成功的参数数，返回
         if (null == o) {
-            return Result.success();
+            return Result.success("操作成功");
         }
         // 判断是Result子类或其本身就返回Object o本身，因为有可能是接口返回时创建了Result,这里避免再次封装
         if (o instanceof Result) {
@@ -58,8 +58,8 @@ public class GlobalResultConfig implements ResponseBodyAdvice<Object>{
         }
         // 如果返回值类型为string，则用josn转换处理
         if (o instanceof String) {
-            return JSON.toJSON(Result.success(o)).toString();
+            return JSON.toJSON(Result.success("操作成功",o)).toString();
         }
-        return Result.success(o);
+        return Result.success("操作成功",o);
     }
 }
