@@ -11,5 +11,11 @@
 
     <artifactId>crm-entity</artifactId>
 
-
+<dependencies>
+    <dependency>
+        <groupId>com.itontheway.manage</groupId>
+        <artifactId>crm-common</artifactId>
+        <version>1.0-SNAPSHOT</version>
+    </dependency>
+</dependencies>
 </project>

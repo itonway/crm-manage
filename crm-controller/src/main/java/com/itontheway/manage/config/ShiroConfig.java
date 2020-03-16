@@ -140,6 +140,7 @@ public class ShiroConfig {
         filterChainMap.put("/user/**", "anon");
         filterChainMap.put("/role/**", "anon");
         filterChainMap.put("/mail/**", "anon");
+        filterChainMap.put("/dict/**", "anon");
         filterChainMap.put("/swagger-ui.html", "anon");
         filterChainMap.put("/swagger-resources/**", "anon");
         filterChainMap.put("/v2/api-docs/**", "anon");
