@@ -1,19 +1,29 @@
 package com.itontheway.manage.controller;
 
 import com.github.pagehelper.PageInfo;
+import com.itontheway.manage.common.DateUtils;
 import com.itontheway.manage.common.Result;
 import com.itontheway.manage.entity.User;
+import com.itontheway.manage.entity.form.UserExport;
+import com.itontheway.manage.entity.form.UserImport;
 import com.itontheway.manage.exception.CustomizeException;
 import com.itontheway.manage.service.IUserService;
+import com.itontheway.manage.util.ExcelUtils;
 import io.swagger.annotations.*;
+import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.beanutils.BeanUtils;
+import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -22,6 +32,7 @@ import java.util.List;
  * @description: TODO
  * @date 2020/3/9 12:21
  */
+@Slf4j
 @Api(value = "用户管理",tags = {"用户管理"})
 @RestController
 @RequestMapping(value = "user")
@@ -29,6 +40,77 @@ public class UserController extends BaseController{
 
     @Autowired
     IUserService userService;
+
+    /**
+     * @Author 公众号 itontheway
+     * @Date 2020/3/17 20:51
+     * @Desc 批量导出用户
+     * @Param [request, response, userParam]
+     * @Return void
+     **/
+    @GetMapping(value = "exportUserBatch")
+    @ApiOperation(value = "批量导出用户",notes = "批量导出用户",produces = "application/json", httpMethod = "GET")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "user", value = "用户", dataType = "object", paramType = "query", required = false)
+    })
+    @ApiResponses({
+            @ApiResponse(code = 200, message = "操作成功", response = Result.class),
+            @ApiResponse(code = 500, message = "操作失败", response = Result.class)
+    })
+    public void exportUserBatch(
+            HttpServletRequest request, HttpServletResponse response,
+            User userParam) throws Exception {
+        List<User> userList = userService.findListByEntity ( userParam );
+        List<UserExport> userExportList = new ArrayList<>();
+        for (User user : userList) {
+            UserExport userExport = new UserExport ();
+            BeanUtils.copyProperties ( userExport, user );
+            userExport.setCreateTimeStr ( DateUtils.formatLocal(user.getCreateTime()));
+            userExportList.add ( userExport );
+        }
+        try {
+            ExcelUtils.exportExcel ( request, response, UserExport.class, userExportList, "user.xlsx" );
+        } catch (Exception e) {
+            log.error ( "导出用户信息失败",e);
+        }
+    }
+    
+    /**
+     * @Author 公众号 itontheway
+     * @Date 2020/3/17 20:51
+     * @Desc 批量导入用户
+     * @Param [file]
+     * @Return com.itontheway.manage.common.Result
+     **/
+    @PostMapping(value = "importUserBatch",headers = "content-type=multipart/form-data")
+    @ApiOperation(value = "批量导入用户",notes = "批量导入用户")
+    @ApiImplicitParams({})
+    public Result importInfoUserBatch(@RequestParam MultipartFile file) {
+        InputStream inputStream = null;
+        try {
+            List<UserImport> UserImportList = (List<UserImport>) ExcelUtils.importExcel ( file ,UserImport.class);
+            if (CollectionUtils.isEmpty ( UserImportList )) {
+                return Result.fail("数据不能为空");
+            }
+            for (UserImport UserImport : UserImportList) {
+                User user = new User();
+                System.out.println ( "导入的数据：" + UserImport );
+                BeanUtils.copyProperties ( user, UserImport );
+                userService.saveOrUpdate(user);
+            }
+            return Result.success("数据导入成功");
+        } catch (Exception e) {
+            return Result.fail(e.getMessage());
+        } finally {
+            if (inputStream != null) {
+                try {
+                    inputStream.close ();
+                } catch (IOException e) {
+                    e.printStackTrace ();
+                }
+            }
+        }
+    }
 
     /**
      * @Author 公众号 itontheway

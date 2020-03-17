@@ -8,4 +8,9 @@ package com.itontheway.manage.common;
 public class  Const {
     public static final String ZERO = "0";
     public static final String ONE = "1";
+
+    public static final String SEX_MEN = "1";
+    public static final String SEX_WOMEN = "2";
+
+
 }
