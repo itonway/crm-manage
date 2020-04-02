@@ -16,3 +16,9 @@ crm-controller/target
 crm-dao/target
 crm-entity/target
 crm-service/target
+crm-manage.iml
+crm-common/crm-common.iml
+crm-controller/crm-controller.iml.iml
+crm-dao/crm-dao.iml.iml
+crm-entity/crm-entity.iml.iml
+crm-service/crm-service.iml.iml
