@@ -1,4 +1,4 @@
-package com.itontheway.manage.entity;
+package com.itontheway.manage.entity.vo;
 
 import com.itontheway.manage.entity.common.BaseEntity;
 import io.swagger.annotations.ApiModel;

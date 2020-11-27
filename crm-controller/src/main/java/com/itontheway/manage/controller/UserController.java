@@ -3,7 +3,6 @@ package com.itontheway.manage.controller;
 import com.github.pagehelper.PageInfo;
 import com.itontheway.manage.common.DateUtils;
 import com.itontheway.manage.common.Result;
-import com.itontheway.manage.entity.User;
 import com.itontheway.manage.entity.form.UserExport;
 import com.itontheway.manage.entity.form.UserImport;
 import com.itontheway.manage.exception.CustomizeException;

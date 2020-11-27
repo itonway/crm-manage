@@ -3,7 +3,6 @@ package com.itontheway.manage.controller;
 import com.alibaba.fastjson.JSON;
 import com.itontheway.manage.common.RedisUtils;
 import com.itontheway.manage.common.Result;
-import com.itontheway.manage.entity.Role;
 import com.itontheway.manage.service.IRoleService;
 import io.swagger.annotations.*;
 import lombok.extern.slf4j.Slf4j;

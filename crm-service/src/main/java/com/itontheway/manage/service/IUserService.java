@@ -1,8 +1,5 @@
 package com.itontheway.manage.service;
 
-import com.itontheway.manage.entity.Menu;
-import com.itontheway.manage.entity.User;
-import com.itontheway.manage.entity.UserRole;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;

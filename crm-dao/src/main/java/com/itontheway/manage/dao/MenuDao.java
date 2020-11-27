@@ -1,7 +1,5 @@
 package com.itontheway.manage.dao;
 
-import com.itontheway.manage.entity.Menu;
-import com.itontheway.manage.entity.UserRole;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 

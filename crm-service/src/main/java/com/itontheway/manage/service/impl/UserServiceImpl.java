@@ -2,9 +2,6 @@ package com.itontheway.manage.service.impl;
 
 import com.itontheway.manage.dao.MenuDao;
 import com.itontheway.manage.dao.UserRoleDao;
-import com.itontheway.manage.entity.Menu;
-import com.itontheway.manage.entity.User;
-import com.itontheway.manage.entity.UserRole;
 import com.itontheway.manage.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

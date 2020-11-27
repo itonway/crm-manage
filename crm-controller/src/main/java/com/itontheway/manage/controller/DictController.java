@@ -1,7 +1,6 @@
 package com.itontheway.manage.controller;
 
 import com.itontheway.manage.common.Result;
-import com.itontheway.manage.entity.Dict;
 import com.itontheway.manage.service.IDictService;
 import io.swagger.annotations.*;
 import lombok.extern.slf4j.Slf4j;

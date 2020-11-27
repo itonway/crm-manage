@@ -151,7 +151,7 @@ public class ShiroConfig {
         //5.配置logout过滤器
         filterChainMap.put("/logout", "anon");
         //6.所有url必须通过认证才可以访问
-        filterChainMap.put("/**","authc");
+        //filterChainMap.put("/**","authc");
         //7.设置默认登录的url
         shiroFilterFactoryBean.setLoginUrl("/login");
         //8.设置成功之后要跳转的链接

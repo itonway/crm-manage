@@ -1,6 +1,6 @@
 package com.itontheway.manage.service;
 
-import com.itontheway.manage.entity.Dict;
+import com.itontheway.manage.entity.vo.Dict;
 
 /**
  * @author: 公众号 itontheway

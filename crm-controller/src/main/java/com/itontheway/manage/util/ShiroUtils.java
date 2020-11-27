@@ -1,6 +1,6 @@
 package com.itontheway.manage.util;
 
-import com.itontheway.manage.entity.User;
+import com.itontheway.manage.entity.vo.User;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.crypto.hash.SimpleHash;
 import org.apache.shiro.session.Session;

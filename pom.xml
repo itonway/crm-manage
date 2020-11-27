@@ -135,6 +135,14 @@
             <artifactId>rocketmq-client</artifactId>
             <version>4.7.0</version>
         </dependency>
+
+        <!-- https://mvnrepository.com/artifact/com.baomidou/mybatis-plus-boot-starter -->
+        <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus-boot-starter</artifactId>
+            <version>3.3.2</version>
+        </dependency>
+
     </dependencies>
 
 

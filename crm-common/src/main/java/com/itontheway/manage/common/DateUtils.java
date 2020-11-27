@@ -2,6 +2,8 @@ package com.itontheway.manage.common;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 /**
@@ -30,6 +32,15 @@ public class DateUtils {
 
     public static Date parseLocal(String dateStr) throws ParseException {
         return getDateFormat ().parse ( dateStr );
+    }
+
+
+    public static void main(String[] args) {
+        LocalDateTime now = LocalDateTime.now();
+        System.out.println(now);
+
+        LocalDate now1 = LocalDate.now();
+        System.out.println(now1);
     }
 
 }

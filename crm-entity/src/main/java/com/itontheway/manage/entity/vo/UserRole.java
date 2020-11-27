@@ -1,12 +1,13 @@
-package com.itontheway.manage.entity;
+package com.itontheway.manage.entity.vo;
 
 import com.itontheway.manage.entity.common.BaseEntity;
 import lombok.Data;
 
 @Data
-public class RoleMenu extends BaseEntity {
+public class UserRole extends BaseEntity {
+
+    private Long userId;
 
     private Long roleId;
 
-    private Long menuId;
 }
