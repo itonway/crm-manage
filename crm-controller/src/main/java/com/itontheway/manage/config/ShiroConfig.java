@@ -143,6 +143,7 @@ public class ShiroConfig {
         filterChainMap.put("/dict/**", "anon");
         filterChainMap.put("/swagger-ui.html", "anon");
         filterChainMap.put("/swagger-resources/**", "anon");
+        filterChainMap.put("/doc.html", "anon");
         filterChainMap.put("/v2/api-docs/**", "anon");
         filterChainMap.put("/webjars/springfox-swagger-ui/**", "anon");
         //4.配置login，不然 ShiroRealm 里面的方法 doGetAuthenticationInfo 会调用两次
