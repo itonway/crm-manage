@@ -2,6 +2,9 @@ package com.itontheway.manage.config;
 
 import com.itontheway.manage.common.Const;
 import com.itontheway.manage.common.EnumUtils;
+import com.itontheway.manage.entity.vo.Menu;
+import com.itontheway.manage.entity.vo.User;
+import com.itontheway.manage.entity.vo.UserRole;
 import com.itontheway.manage.exception.CustomizeException;
 import com.itontheway.manage.service.IUserService;
 import lombok.extern.slf4j.Slf4j;

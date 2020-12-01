@@ -1,5 +1,6 @@
 package com.itontheway.manage.dao;
 
+import com.itontheway.manage.entity.vo.Role;
 import org.springframework.stereotype.Repository;
 
 @Repository

@@ -1,5 +1,7 @@
 package com.itontheway.manage.service;
 
+import com.itontheway.manage.entity.vo.Role;
+
 /**
  * @author: 公众号 itontheway
  * @description: TODO

@@ -5,7 +5,7 @@
     <parent>
         <artifactId>crm-manage</artifactId>
         <groupId>com.itontheway.manage</groupId>
-        <version>1.0-SNAPSHOT</version>
+        <version>1.0</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
@@ -15,17 +15,17 @@
         <dependency>
             <groupId>com.itontheway.manage</groupId>
             <artifactId>crm-common</artifactId>
-            <version>1.0-SNAPSHOT</version>
+            <version>1.0</version>
         </dependency>
         <dependency>
             <groupId>com.itontheway.manage</groupId>
             <artifactId>crm-entity</artifactId>
-            <version>1.0-SNAPSHOT</version>
+            <version>1.0</version>
         </dependency>
         <dependency>
             <groupId>com.itontheway.manage</groupId>
             <artifactId>crm-service</artifactId>
-            <version>1.0-SNAPSHOT</version>
+            <version>1.0</version>
         </dependency>
 
         <!-- shiro-core -->
@@ -52,7 +52,117 @@
             <artifactId>commons-io</artifactId>
             <version>2.6</version>
         </dependency>
-
     </dependencies>
 
+
+    <!-- 打包配置  -->
+    <build>
+        <finalName>crm-manage</finalName>
+        <!-- 打包分离yml,properties等配置文件 -->
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <excludes>
+                    <exclude>**/*.properties</exclude>
+                </excludes>
+            </resource>
+        </resources>
+
+
+        <plugins>
+
+            <plugin>
+                <artifactId>maven-clean-plugin</artifactId>
+                <version>2.5</version>
+                <executions>
+                    <execution>
+                        <id>auto-clean</id>
+                        <phase>initialize</phase>
+                        <goals>
+                            <goal>clean</goal>
+                        </goals>
+                        <configuration>
+                            <skip>false</skip>
+                            <filesets>
+                                <fileset>
+                                    <directory>${project.artifactId}</directory>
+                                </fileset>
+                            </filesets>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <!--打包jar-->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <configuration>
+                    <!--不打包资源文件-->
+                    <excludes>
+                        <exclude>*.**</exclude>
+                    </excludes>
+                    <archive>
+                        <manifest>
+                            <!--指定入口类-->
+                            <mainClass>com.itontheway.manage.CrmManageWebApplication</mainClass>
+                            <addClasspath>true</addClasspath>
+                            <!--MANIFEST.MF 中 Class-Path 加入前缀-->
+                            <classpathPrefix>lib/</classpathPrefix>
+                            <!--jar包不包含唯一版本标识-->
+                            <useUniqueVersions>false</useUniqueVersions>
+                        </manifest>
+                    </archive>
+                    <outputDirectory>${project.artifactId}</outputDirectory>
+                </configuration>
+            </plugin>
+
+            <!--拷贝依赖 copy-dependencies https://www.cnblogs.com/ztgzlu/p/11011125.html-->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>copy-dependencies</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>copy-dependencies</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>
+                                ${project.artifactId}/lib/
+                            </outputDirectory>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <!--拷贝资源文件 copy-resources-->
+            <plugin>
+                <artifactId>maven-resources-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>copy-resources</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+                        <configuration>
+                            <resources>
+                                <resource>
+                                    <directory>src/main/resources</directory>
+                                    <!-- 指定参与构建的resoures-->
+                                    <includes>
+                                        <include>*.**</include>
+                                    </includes>
+                                </resource>
+                            </resources>
+                            <outputDirectory>${directory}/config</outputDirectory>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+
+    </build>
 </project>

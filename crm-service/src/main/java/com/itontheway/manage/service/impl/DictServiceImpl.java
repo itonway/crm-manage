@@ -1,5 +1,6 @@
 package com.itontheway.manage.service.impl;
 
+import com.itontheway.manage.entity.vo.Dict;
 import com.itontheway.manage.service.IDictService;
 import org.springframework.stereotype.Service;
 
