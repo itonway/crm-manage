@@ -11,6 +11,10 @@
 
     <artifactId>crm-controller</artifactId>
 
+    <properties>
+        <crm.path>${project.build.directory}/crm</crm.path>
+    </properties>
+
     <dependencies>
         <dependency>
             <groupId>com.itontheway.manage</groupId>
@@ -58,6 +62,7 @@
     <!-- 打包配置  -->
     <build>
         <finalName>crm-manage</finalName>
+
         <!-- 打包分离yml,properties等配置文件 -->
         <resources>
             <resource>
@@ -68,9 +73,7 @@
             </resource>
         </resources>
 
-
         <plugins>
-
             <plugin>
                 <artifactId>maven-clean-plugin</artifactId>
                 <version>2.5</version>
@@ -85,7 +88,7 @@
                             <skip>false</skip>
                             <filesets>
                                 <fileset>
-                                    <directory>${project.artifactId}</directory>
+                                    <directory>${crm.path}</directory>
                                 </fileset>
                             </filesets>
                         </configuration>
@@ -98,26 +101,26 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
                 <configuration>
-                    <!--不打包资源文件-->
+                    <!--不打包资源文件 （配置文件和依赖包分开）-->
                     <excludes>
                         <exclude>*.**</exclude>
                     </excludes>
                     <archive>
                         <manifest>
-                            <!--指定入口类-->
                             <mainClass>com.itontheway.manage.CrmManageWebApplication</mainClass>
                             <addClasspath>true</addClasspath>
-                            <!--MANIFEST.MF 中 Class-Path 加入前缀-->
                             <classpathPrefix>lib/</classpathPrefix>
-                            <!--jar包不包含唯一版本标识-->
                             <useUniqueVersions>false</useUniqueVersions>
                         </manifest>
+                        <manifestEntries>
+                            <Class-Path>./</Class-Path>
+                        </manifestEntries>
                     </archive>
-                    <outputDirectory>${project.artifactId}</outputDirectory>
+                    <outputDirectory>${crm.path}</outputDirectory>
                 </configuration>
             </plugin>
 
-            <!--拷贝依赖 copy-dependencies https://www.cnblogs.com/ztgzlu/p/11011125.html-->
+            <!-- 该插件的作用是用于复制依赖的jar包到指定的文件夹里 -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-dependency-plugin</artifactId>
@@ -130,14 +133,14 @@
                         </goals>
                         <configuration>
                             <outputDirectory>
-                                ${project.artifactId}/lib/
+                                ${crm.path}/lib/
                             </outputDirectory>
                         </configuration>
                     </execution>
                 </executions>
             </plugin>
 
-            <!--拷贝资源文件 copy-resources-->
+            <!-- 该插件的作用是用于复制配置文件到指定目录 -->
             <plugin>
                 <artifactId>maven-resources-plugin</artifactId>
                 <executions>
@@ -151,18 +154,17 @@
                             <resources>
                                 <resource>
                                     <directory>src/main/resources</directory>
-                                    <!-- 指定参与构建的resoures-->
                                     <includes>
                                         <include>*.**</include>
                                     </includes>
                                 </resource>
                             </resources>
-                            <outputDirectory>${directory}/config</outputDirectory>
+                            <outputDirectory>${crm.path}/config/</outputDirectory>
                         </configuration>
                     </execution>
                 </executions>
             </plugin>
-        </plugins>
 
+        </plugins>
     </build>
 </project>
