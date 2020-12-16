@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.itontheway.manage.dao.RoleMenuDao">
 
-  <resultMap id="BaseResultMap" type="com.itontheway.manage.entity.RoleMenu">
+  <resultMap id="BaseResultMap" type="com.itontheway.manage.entity.vo.RoleMenu">
     <id column="id" jdbcType="BIGINT" property="id" />
     <result column="role_id" jdbcType="BIGINT" property="roleId" />
     <result column="menu_id" jdbcType="BIGINT" property="menuId" />
@@ -47,7 +47,7 @@
   </insert>
 
 
-  <update id="update" parameterType="com.itontheway.manage.entity.RoleMenu">
+  <update id="update" parameterType="com.itontheway.manage.entity.vo.RoleMenu">
     update t_crm_role_menu
     set role_id = #{roleId,jdbcType=BIGINT},
       menu_id = #{menuId,jdbcType=BIGINT}

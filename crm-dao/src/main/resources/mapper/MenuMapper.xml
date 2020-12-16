@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.itontheway.manage.dao.MenuDao">
 
-    <resultMap id="BaseResultMap" type="com.itontheway.manage.entity.Menu">
+    <resultMap id="BaseResultMap" type="com.itontheway.manage.entity.vo.Menu">
         <id column="id" jdbcType="BIGINT" property="id"/>
         <result column="name" jdbcType="VARCHAR" property="name"/>
         <result column="p_id" jdbcType="VARCHAR" property="pId"/>
@@ -28,7 +28,7 @@
     </delete>
 
 
-    <insert id="insert" parameterType="com.itontheway.manage.entity.Menu">
+    <insert id="insert" parameterType="com.itontheway.manage.entity.vo.Menu">
         insert into t_crm_menu
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="name != null">
@@ -90,7 +90,7 @@
         </trim>
     </insert>
 
-    <update id="update" parameterType="com.itontheway.manage.entity.Menu">
+    <update id="update" parameterType="com.itontheway.manage.entity.vo.Menu">
         update t_crm_menu
         <set>
             <if test="name != null">
@@ -119,7 +119,7 @@
         where id = #{id,jdbcType=BIGINT}
     </update>
 
-    <select id="findMenuList" parameterType="com.itontheway.manage.entity.Menu" resultMap="BaseResultMap">
+    <select id="findMenuList" parameterType="com.itontheway.manage.entity.vo.Menu" resultMap="BaseResultMap">
         SELECT
         <include refid="Base_Column_List"/>
         FROM T_INFO_MENU

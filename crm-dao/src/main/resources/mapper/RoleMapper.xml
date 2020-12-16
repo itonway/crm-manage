@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.itontheway.manage.dao.RoleDao">
-    <resultMap id="BaseResultMap" type="com.itontheway.manage.entity.Role">
+    <resultMap id="BaseResultMap" type="com.itontheway.manage.entity.vo.Role">
         <id column="id" jdbcType="BIGINT" property="id"/>
         <result column="name" jdbcType="VARCHAR" property="name"/>
         <result column="status" jdbcType="CHAR" property="status"/>
@@ -35,7 +35,7 @@
         </foreach>
     </delete>
 
-    <insert id="insert" useGeneratedKeys="true" keyProperty="id" parameterType="com.itontheway.manage.entity.Role">
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id" parameterType="com.itontheway.manage.entity.vo.Role">
         insert into t_crm_role
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="name != null">
@@ -73,7 +73,7 @@
         </trim>
     </insert>
 
-    <update id="update" parameterType="com.itontheway.manage.entity.Role">
+    <update id="update" parameterType="com.itontheway.manage.entity.vo.Role">
         update t_crm_role
         <set>
             <if test="name != null">
@@ -95,7 +95,7 @@
         where id = #{id,jdbcType=BIGINT}
     </update>
 
-    <select id="findListByEntity" parameterType="com.itontheway.manage.entity.Role" resultMap="BaseResultMap">
+    <select id="findListByEntity" parameterType="com.itontheway.manage.entity.vo.Role" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
         from t_crm_role
