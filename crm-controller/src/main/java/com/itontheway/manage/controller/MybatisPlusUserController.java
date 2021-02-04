@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -52,4 +53,18 @@ public class MybatisPlusUserController {
         IPage<MybatisPlusUser> iPage = mybatisPlusUserService.page(new Page<>(page, limit), queryWrapper);
         return iPage;
     }
+
+    @RequestMapping(value = "findUserListPage",method = RequestMethod.POST)
+    @ApiOperation(value = "批量保存用户信息",notes = "批量保存用户信息",produces = "application/json", httpMethod = "POST")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "mybatisPlusUser", value = "用户信息", dataType = "object", paramType = "query", required = false)
+    })
+    public void saveUserPath(){
+        MybatisPlusUser mybatisPlusUser = new MybatisPlusUser();
+        List<MybatisPlusUser> list = new ArrayList<>();
+        list.add(mybatisPlusUser);
+        mybatisPlusUserService.saveBatch(list);
+    }
+
+
 }
