@@ -1,11 +1,13 @@
 package com.itontheway.manage;
 
+import com.itontheway.manage.dynamicdatasource.DataSourceConfig;
 import lombok.extern.slf4j.Slf4j;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
+import org.springframework.context.annotation.Import;
 import org.springframework.scheduling.annotation.EnableScheduling;
 
 /**
@@ -14,6 +16,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
  * @date 2020/3/7 12:21
  */
 @SpringBootApplication(exclude = DataSourceAutoConfiguration.class)
+@Import(DataSourceConfig.class)
 //dao层所在目录，不然扫描不到
 @MapperScan(value = "com.itontheway.manage.dao")
 //保证切面可以切入

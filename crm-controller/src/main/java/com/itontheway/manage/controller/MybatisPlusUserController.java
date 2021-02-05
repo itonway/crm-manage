@@ -22,7 +22,7 @@ import java.util.List;
  * @desc
  * @Date 2020-12-14 16:13
  */
-@Api("MybatisPlus测试")
+@Api(value = "MybatisPlus测试",tags = "MybatisPlus测试")
 @RestController
 @RequestMapping("mybatisPlusUser")
 public class MybatisPlusUserController {

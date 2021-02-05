@@ -1,18 +1,19 @@
 package com.itontheway.manage.validator;
 
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
+import com.itontheway.manage.common.DataSourceType;
+
+import java.lang.annotation.*;
 
 /**
  * @Author: xiegl
  * @desc MyDataSource  默认数据源 主库 master
  * @Date 2021-2-4 11:21
  */
+@Target({ElementType.METHOD,ElementType.TYPE})//作用在方法和类上
 @Retention(RetentionPolicy.RUNTIME)
-@Target({ElementType.METHOD})
+@Documented
+@Inherited
 public @interface MyDataSource {
-    String value() default "master";
+    String value() default DataSourceType.MASTER;
 }
 

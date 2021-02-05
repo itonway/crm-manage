@@ -1,5 +1,6 @@
 package com.itontheway.manage.entity.vo;
 
+import com.baomidou.mybatisplus.annotation.TableName;
 import com.itontheway.manage.entity.common.BaseEntity;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -16,6 +17,7 @@ import javax.validation.constraints.Size;
  */
 @ApiModel(value = "角色实体类")
 @Data
+@TableName("t_info_role")
 public class Role extends BaseEntity {
     @ApiModelProperty(value = "角色名称")
     @NotBlank(message = "角色名称不能为空")

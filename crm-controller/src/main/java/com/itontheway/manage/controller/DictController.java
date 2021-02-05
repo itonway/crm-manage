@@ -20,7 +20,7 @@ import java.util.List;
  * @description: TODO
  * @date 2020/3/16 20:28
  */
-@Api("字典管理")
+@Api(value = "字典管理",tags = "字典管理")
 @Slf4j
 @RestController
 @RequestMapping("dict")
