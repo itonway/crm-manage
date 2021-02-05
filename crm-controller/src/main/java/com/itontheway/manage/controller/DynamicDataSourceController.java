@@ -23,7 +23,6 @@ import org.springframework.web.bind.annotation.RestController;
 @Api(value = "动态数据管理",tags = "动态数据源")
 @RestController
 @RequestMapping("dynamicDataSource")
-//@MyDataSource(DataSourceType.SLAVE1)
 public class DynamicDataSourceController {
     @Autowired
     IMybatisPlusUserService mybatisPlusUserService;

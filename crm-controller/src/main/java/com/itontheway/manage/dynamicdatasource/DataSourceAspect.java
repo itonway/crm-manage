@@ -64,30 +64,4 @@ public class DataSourceAspect {
             RoutingDataSource.clearDataSource();
         }
     }
-
-//    /**
-//     * @Author: xiegl
-//     * @desc 执行前切换数据库
-//     * @Date 2021-2-4 11:29
-//     * @Return void
-//     * @Param [myDataSource]
-//     */
-//    @Before(value = "dataSourcePointCut(myDataSource)")
-//    public void switchDataSource(MyDataSource myDataSource) {
-//        log.info ( "DataSourceAspect 设置数据源， switchDataSource" );
-//        RoutingDataSource.setDataSource(myDataSource.value());
-//    }
-//
-//    /**
-//     * @Author: xiegl
-//     * @desc 切点执行完后 切换成主数据库
-//     * @Date 2021-2-4 11:27
-//     * @Return void
-//     * @Param [myDataSource]
-//     */
-//    @After(value = "dataSourcePointCut(myDataSource)")
-//    public void after(MyDataSource myDataSource) {
-//        log.info ( "DataSourceAspect，执行完后清空数据源， after" );
-//        RoutingDataSource.clearDataSource();
-//    }
 }
