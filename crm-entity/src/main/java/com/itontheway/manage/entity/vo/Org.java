@@ -1,5 +1,6 @@
 package com.itontheway.manage.entity.vo;
 
+import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 
 import java.util.Date;
@@ -10,6 +11,7 @@ import java.util.Date;
  * @author ontheway
  * @since 2020-11-27 17:26:01
  */
+@TableName("t_info_org")
 @Data
 @SuppressWarnings("serial")
 public class Org {

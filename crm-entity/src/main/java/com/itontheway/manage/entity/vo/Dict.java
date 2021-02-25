@@ -1,5 +1,6 @@
 package com.itontheway.manage.entity.vo;
 
+import com.baomidou.mybatisplus.annotation.TableName;
 import com.itontheway.manage.common.AutoIncKey;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -16,6 +17,7 @@ import javax.validation.constraints.Size;
  */
 @ApiModel(value = "字典实体类")
 @Data
+@TableName("t_info_dict")
 public class Dict{
     @AutoIncKey
     @Id

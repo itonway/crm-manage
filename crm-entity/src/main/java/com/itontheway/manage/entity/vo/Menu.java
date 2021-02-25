@@ -1,11 +1,13 @@
 package com.itontheway.manage.entity.vo;
 
+import com.baomidou.mybatisplus.annotation.TableName;
 import com.itontheway.manage.entity.common.BaseEntity;
 import lombok.Data;
 
 import java.util.List;
 
 @Data
+@TableName("t_info_menu")
 public class Menu extends BaseEntity {
 
     private String name;
