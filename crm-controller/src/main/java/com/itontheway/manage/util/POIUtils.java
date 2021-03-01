@@ -1,5 +1,6 @@
 package com.itontheway.manage.util;
 
+import lombok.extern.slf4j.Slf4j;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
@@ -22,7 +23,11 @@ import java.util.List;
  * @desc
  * @Date 2021-2-26 10:56
  */
+@Slf4j
 public class POIUtils {
+
+    private static final String XLS = "xls";
+    private static final String XLSX = "xlsx";
 
     public static void main(String[] args) throws Exception {
         List<List<String>> excelData = getExcelData();
@@ -34,9 +39,28 @@ public class POIUtils {
     }
 
     public static List<List<String>> getExcelData() throws Exception {
-        List<List<String>> excelDataList = convertExcelData("I:\\project\\gilite\\gite\\ds-excel.xlsx");
+        List<List<String>> excelDataList = convertExcelListData("I:\\project\\gilite\\gite\\excel\\ds-excel1002.xlsx");
+        //List<List<String>> convertExcelListData = convertExcelListData("I:\\project\\gilite\\gite\\excel");
         return excelDataList;
     }
+
+
+    public static List<List<String>> convertExcelListData(String filePath) throws Exception {
+        List<List<String>> list = new ArrayList<>();
+        File file = new File(filePath);
+        if(file.isFile()){
+            list = convertExcelData(file.getPath());
+        }
+        if(file.isDirectory()){
+            File[] listFiles = file.listFiles();
+            for (File f : listFiles) {
+                List<List<String>> list1 = convertExcelData(f.getPath());
+                list.addAll(list1);
+            }
+        }
+        return list;
+    }
+
 
     public static List<List<String>> convertExcelData(String filePath) throws Exception {
         List<List<String>> list = new ArrayList<>();
@@ -115,8 +139,6 @@ public class POIUtils {
     }
 
 
-    private static final String XLS = "xls";
-    private static final String XLSX = "xlsx";
 
     public static Workbook getWookBook(File file) throws IOException {
         String fileName = file.getName();

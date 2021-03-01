@@ -8,10 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
+import java.sql.*;
 import java.util.List;
 
 /**
@@ -25,18 +22,37 @@ import java.util.List;
 @RequestMapping(value = "jdbc")
 public class JDBController {
 
+    private static final String COLUMN_NAME = "IMPORT_BATCH_DATE";
+
+    private static final String COLUMN_TYPE = "DATE";
+
 
     @GetMapping(value = "jdbcBatchInsert")
     @ApiOperation(value = "JDBC批量导入数据",notes = "JDBC批量导入数据",produces = "application/json", httpMethod = "GET")
     public void jdbcBatchInsert(){
         String driverClassName = "com.mysql.cj.jdbc.Driver";    //启动驱动
-        String url = "jdbc:mysql://localhost:3308/test";    //设置连接路径
+        String url = "jdbc:mysql://localhost:3308/ds_excel";    //设置连接路径
         String username = "root";    //数据库用户名
         String password = "123";    //数据库连接密码
         Connection con = null;        //连接
         PreparedStatement pst = null;    //使用预编译语句
         ResultSet rs = null;    //获取的结果集
+        String tableName = "T_TEA_ORG1";
+        String columnName = "ab";
         try {
+            Class.forName(driverClassName); //执行驱动
+            con = DriverManager.getConnection(url, username, password); //获取连接
+
+            // 判断某个表中是否包含某列
+            DatabaseMetaData metaData = con.getMetaData();
+            rs = metaData.getColumns(null, null, tableName, columnName);
+            if(!rs.next()){
+                StringBuilder stringBuilder = new StringBuilder();
+                stringBuilder.append("ALTER TABLE ").append(tableName).append("ADD ").append(COLUMN_NAME).append(COLUMN_TYPE);
+                pst = con.prepareStatement(stringBuilder.toString());
+                pst.executeUpdate(stringBuilder.toString());
+            }
+
             List<List<String>> excelDataList = POIUtils.getExcelData();
             String str = "tea_name,tea_no,org_name";
             String[] split = str.split(",");
@@ -48,8 +64,6 @@ public class JDBController {
             }
             sql.append(value.substring(0,value.length()-1)).append(")");
             System.out.println("待执行的SQL............"+sql);
-            Class.forName(driverClassName); //执行驱动
-            con = DriverManager.getConnection(url, username, password); //获取连接
             pst = con.prepareStatement(sql.toString());
             final int batchSize = 1000;
             int count = 0;
