@@ -12,6 +12,7 @@ import java.util.Date;
  * @date 2020/3/12 20:01
  */
 public class DateUtils {
+    public static final String YEAR_MONTH_DAY_HOUR_MINTE_SECOND1 = "yyyyMMddHHmmss";
     public static final String YEAR_MONTH_DAY = "yyyy-MM-dd";
     public static final String YEAR_MONTH_DAY_HOUR_MINTE_SECOND = "yyyy-MM-dd HH:mm:ss";
     // 解决 simpleDateFormat 线程不安全问题

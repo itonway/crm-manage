@@ -1,5 +1,6 @@
 package com.itontheway.manage.controller;
 
+import com.itontheway.manage.common.DateUtils;
 import com.itontheway.manage.util.POIUtils;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -9,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.sql.*;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -37,18 +39,20 @@ public class JDBController {
         Connection con = null;        //连接
         PreparedStatement pst = null;    //使用预编译语句
         ResultSet rs = null;    //获取的结果集
-        String tableName = "T_TEA_ORG1";
-        String columnName = "ab";
+        String tableName = "T_TEA_ORG";
+
+        String s = DateUtils.formatLocal(new Date());
         try {
             Class.forName(driverClassName); //执行驱动
             con = DriverManager.getConnection(url, username, password); //获取连接
 
             // 判断某个表中是否包含某列
             DatabaseMetaData metaData = con.getMetaData();
-            rs = metaData.getColumns(null, null, tableName, columnName);
+            rs = metaData.getColumns(null, null, tableName, COLUMN_NAME);
             if(!rs.next()){
                 StringBuilder stringBuilder = new StringBuilder();
-                stringBuilder.append("ALTER TABLE ").append(tableName).append("ADD ").append(COLUMN_NAME).append(COLUMN_TYPE);
+                stringBuilder.append(" ALTER TABLE ").append(tableName).append(" ADD ").append("  ").append(COLUMN_NAME).append("  ").append(COLUMN_TYPE);
+                System.out.println("alter sql: "+stringBuilder.toString());
                 pst = con.prepareStatement(stringBuilder.toString());
                 pst.executeUpdate(stringBuilder.toString());
             }
@@ -57,18 +61,19 @@ public class JDBController {
             String str = "tea_name,tea_no,org_name";
             String[] split = str.split(",");
             StringBuilder sql = new StringBuilder();
-            sql.append("INSERT INTO T_TEA_ORG (").append(str).append(") VALUES (");
+            sql.append("INSERT INTO T_TEA_ORG (").append(str).append(",").append(COLUMN_NAME).append(") VALUES (");
             StringBuilder value = new StringBuilder();
             for(int i = 0 ; i < split.length ; i++){
                 value.append("?,");
             }
-            sql.append(value.substring(0,value.length()-1)).append(")");
+            sql.append(value.append("?").append(")"));
             System.out.println("待执行的SQL............"+sql);
             pst = con.prepareStatement(sql.toString());
             final int batchSize = 1000;
             int count = 0;
             for (List<String> dataList : excelDataList) {
                 int m = 1;
+                dataList.add(dataList.size(),s);
                 for(int i = 0 ; i < dataList.size() ; i++){
                     pst.setString(m++, dataList.get(i));
                 }
