@@ -5,10 +5,13 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
 
+import javax.annotation.Resource;
+
 
 @Component
 public class RedisUtils {
-    @Autowired
+
+    @Resource
     private RedisTemplate<String,Object> redisTemplate;
     /**
      * @Author 公众号 itontheway

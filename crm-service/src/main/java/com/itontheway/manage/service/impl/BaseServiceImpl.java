@@ -8,6 +8,7 @@ import com.itontheway.manage.service.IBaseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import java.util.List;
 import java.util.Map;
 
@@ -19,7 +20,7 @@ import java.util.Map;
 @Service
 public abstract class BaseServiceImpl<T extends BaseEntity> implements IBaseService<T> {
 
-    @Autowired
+    @Resource
     private BaseDao<T> baseDao;
 
     @Override

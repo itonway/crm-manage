@@ -7,13 +7,14 @@ import com.itontheway.manage.entity.vo.Role;
 import com.itontheway.manage.service.IRoleService;
 import io.swagger.annotations.*;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+
+import javax.annotation.Resource;
 
 /**
  * @author: 公众号 itontheway
@@ -26,9 +27,9 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(value = "role")
 public class RoleController extends BaseController{
     private static final String ROLE_KEY = "role_"; //角色相关redis key
-    @Autowired
+    @Resource
     IRoleService roleService;
-    @Autowired
+    @Resource
     RedisUtils redisUtils;
 
     /**

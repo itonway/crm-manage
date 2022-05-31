@@ -9,6 +9,7 @@ import com.itontheway.manage.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import java.util.List;
 
 /**
@@ -18,9 +19,11 @@ import java.util.List;
  */
 @Service
 public class UserServiceImpl extends BaseServiceImpl<User> implements IUserService {
-    @Autowired
+
+    @Resource
     UserRoleDao userRoleDao;
-    @Autowired
+
+    @Resource
     MenuDao menuDao;
 
     @Override

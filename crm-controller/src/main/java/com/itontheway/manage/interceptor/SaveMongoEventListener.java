@@ -3,7 +3,6 @@ package com.itontheway.manage.interceptor;
 import com.itontheway.manage.common.AutoIncKey;
 import com.itontheway.manage.entity.common.IncInfo;
 import org.bson.Document;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.FindAndModifyOptions;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.mapping.event.AbstractMongoEventListener;
@@ -15,6 +14,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.util.Assert;
 import org.springframework.util.ReflectionUtils;
 
+import javax.annotation.Resource;
 import java.util.Objects;
 
 /**
@@ -25,7 +25,7 @@ import java.util.Objects;
 @Component
 public class SaveMongoEventListener extends AbstractMongoEventListener<Object> {
 
-    @Autowired
+    @Resource
     private MongoTemplate mongoTemplate;
 
     /**

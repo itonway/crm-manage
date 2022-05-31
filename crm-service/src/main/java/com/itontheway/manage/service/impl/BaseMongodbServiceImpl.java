@@ -9,6 +9,7 @@ import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.List;
@@ -20,9 +21,12 @@ import java.util.List;
  */
 @Service
 public abstract class BaseMongodbServiceImpl<T> implements IBaseMongodbService<T> {
+
     protected abstract Class<T> getEntityClass();
-    @Autowired
+
+    @Resource
     private MongoTemplate mongoTemplate;
+
     @Override
     public Long insert(T t) {
         mongoTemplate.save(t);

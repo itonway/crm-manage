@@ -9,6 +9,7 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 import java.io.File;
@@ -21,7 +22,8 @@ import java.io.File;
 @Slf4j
 @Service
 public class MailServiceImpl implements IMailService {
-    @Autowired
+
+    @Resource
     JavaMailSender javaMailSender;
 
     @Override

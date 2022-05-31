@@ -19,7 +19,7 @@
 //@RestController
 //@RequestMapping(value = "mail")
 //public class MailController extends BaseController{
-//    @Autowired
+//    @Resource
 //    IMailService mailService;
 //    @Value("${spring.mail.username}")
 //    String from;
