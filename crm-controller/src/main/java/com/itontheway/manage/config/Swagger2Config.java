@@ -1,6 +1,8 @@
 package com.itontheway.manage.config;
 
 import com.github.xiaoymin.knife4j.spring.annotations.EnableKnife4j;
+import io.swagger.annotations.ApiOperation;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import springfox.documentation.builders.ApiInfoBuilder;
@@ -20,26 +22,27 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @Configuration
 @EnableSwagger2
 @EnableKnife4j
+@Slf4j
 public class Swagger2Config{
     @Bean
     public Docket createRestApi() {
         return new Docket(DocumentationType.SWAGGER_2)
                 .apiInfo(apiInfo())
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("com.itontheway.manage"))
+                .apis(RequestHandlerSelectors.withMethodAnnotation(ApiOperation.class))
                 .paths(PathSelectors.any())
                 .build();
     }
 
-    private ApiInfo apiInfo() {
+    public ApiInfo apiInfo() {
+        log.info("Knife4j-Swagger 接口访问地址：【{}】","http://localhost:8081/crm/doc.html");
         return new ApiInfoBuilder()
                 //标题
-                .title("SpringBoot利用Swagger构建API文档")
+                .title("在线API文档")
                 //描述
-                .description("itontheway微信公众号")
+                .description("在线接口文档")
                 //作者信息
-                .contact(new Contact("itontheway","https://github.com/itonway/crm-manage","itontheway@163.com"))
+                .contact(new Contact("ONTHEWAY","","admin@163.com"))
                 .build();
     }
-
 }

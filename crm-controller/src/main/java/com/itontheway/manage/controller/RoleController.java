@@ -1,6 +1,6 @@
 package com.itontheway.manage.controller;
 
-import com.alibaba.fastjson.JSON;
+import cn.hutool.json.JSONUtil;
 import com.itontheway.manage.common.RedisUtils;
 import com.itontheway.manage.common.Result;
 import com.itontheway.manage.entity.vo.Role;
@@ -74,8 +74,8 @@ public class RoleController extends BaseController{
         String key = ROLE_KEY + id;
         boolean hasKey = redisUtils.hasKey(key);
         if(hasKey){
-            String string = JSON.toJSONString(redisUtils.get(key));
-            Role role = JSON.parseObject(string, Role.class);
+            String string = JSONUtil.toJsonStr(redisUtils.get(key));
+            Role role = JSONUtil.toBean(string, Role.class);
             log.info("从缓存中获取角色:"+role);
             return role;
         }

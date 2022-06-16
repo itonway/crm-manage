@@ -1,6 +1,6 @@
-package com.itontheway.manage.interceptor;
+package com.itontheway.manage.config;
 
-import com.alibaba.fastjson.JSON;
+import cn.hutool.json.JSONUtil;
 import com.itontheway.manage.annotation.IgnorIntercept;
 import com.itontheway.manage.common.Result;
 import lombok.extern.slf4j.Slf4j;
@@ -58,7 +58,7 @@ public class GlobalResultConfig implements ResponseBodyAdvice<Object>{
         }
         // 如果返回值类型为string，则用josn转换处理
         if (o instanceof String) {
-            return JSON.toJSON(Result.success("操作成功",o)).toString();
+            return JSONUtil.toJsonStr(Result.success("操作成功",o));
         }
         return Result.success("操作成功",o);
     }

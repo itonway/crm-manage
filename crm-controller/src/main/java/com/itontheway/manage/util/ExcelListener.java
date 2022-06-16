@@ -1,8 +1,8 @@
 package com.itontheway.manage.util;
 
+import cn.hutool.json.JSONUtil;
 import com.alibaba.excel.context.AnalysisContext;
 import com.alibaba.excel.event.AnalysisEventListener;
-import com.alibaba.fastjson.JSON;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.ArrayList;
@@ -27,7 +27,7 @@ public class ExcelListener<T> extends AnalysisEventListener<T> {
 
     @Override
     public void invoke(T object, AnalysisContext analysisContext) {
-        log.info( "解析得到的参数:" + JSON.toJSONString ( object ) );
+        log.info( "解析得到的参数:" + JSONUtil.toJsonStr ( object ) );
         data.add ( object );
     }
 
